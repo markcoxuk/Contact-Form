@@ -410,18 +410,22 @@
         if(valid) {
             jQuery.ajax({
                 url: 'https://tls-dev.web.app/contacts',
-                data:'fname='+$("#fname").val()+'&lname='+
-                $("#lname").val()+'&email='+
-                $("#email").val()+'&phone='+
-                $("#phone").val()+'&privacy='+
-                $("#privacy").val()+'&marketing='+
-                $("#marketing").val()+'&token='+thetoken,
+                data: JSON.stringify({
+                    fname: $("#fname").val(),
+                    lname: $("#lname").val(),
+                    email: $("#email").val(),
+                    phone: $("#phone").val(),
+                    marketing: $("#marketing").val()
+                }),
+                headers: {
+                    "Authorization": "Bearer "+thetoken,
+                },
                 type: "POST",
                 success:function(data){
                     $("#send-status").html('<p class="success">'+data+'</p>');
                 },
-                error:function (){
-                    $("#send-status").html('<p class="error">Sorry, we were unable to send your details. Please try again or contact us via phone / email.</p>');
+                error:function (data){
+                    $("#send-status").html('<p class="error">Sorry, we were unable to send your details. Please try again or contact us via phone / email.<br>'+data+'</p>');
                 }
             });
         }
