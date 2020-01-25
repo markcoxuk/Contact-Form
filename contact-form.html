@@ -409,13 +409,13 @@
         thetoken = $.urlParam('token');
         if(valid) {
             jQuery.ajax({
-                url: 'test.php?token='+thetoken,
+                url: 'https://tls-dev.web.app/contacts',
                 data:'fname='+$("#fname").val()+'&lname='+
                 $("#lname").val()+'&email='+
                 $("#email").val()+'&phone='+
                 $("#phone").val()+'&privacy='+
                 $("#privacy").val()+'&marketing='+
-                $("#marketing").val(),
+                $("#marketing").val()+'&token='+thetoken,
                 type: "POST",
                 success:function(data){
                     $("#send-status").html('<p class="success">'+data+'</p>');
