@@ -38,5 +38,8 @@ We do not have access to the form processing server. Client side captcha is inad
 ### Phone field formatting validation
 Internationalisation is beyond the scope of this test and we do not know the origin of our form users. Phone number formatting is intentionally left fuzzy to allow for regionalised variations in phone number formats.
 
-### Custom success / failure messages
+### Custom success / failure messages & actions
 We do not have access to the form processing server. The response message is green for soft success along with the data response from the processing server. Hard errors are red with a static message.
+
+### Branding
+Branding is beyond the scope of this test and is left out to improve page loading / rendering and maintain Lean principles. Site icon, company logo, copyright, header / footer, navigation / social media links and additional copy would be added in production.
