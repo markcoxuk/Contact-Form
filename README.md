@@ -8,7 +8,7 @@ The form uses the following third party frameworks / libraries:
 * Google Fonts - Yantramanav
 
 ## Features
-The form features leverage jQuery and basic javascript.
+The form leverages jQuery and basic javascript.
 
 ### Token Check
 Checks for the existence and correct formatting of the test submission token in the URL parameters and warns if the token is missing of malformed.
