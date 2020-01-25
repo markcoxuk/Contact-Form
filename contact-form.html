@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contact Form - Example Company</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 3rd Party Stylesheets -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+        <!-- Load jQuery -->
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+        <style type="text/css">
+            @import url('https://fonts.googleapis.com/css?family=Yantramanav:100,300');
+
+            /* ------------- */
+            /* GLOBAL STYLES */
+            /* ------------- */
+
+            * {
+              box-sizing: border-box;
+            }
+
+            html, body {
+              min-height: 100%;
+            }
+
+            body {
+              background: #3952a3;
+              color: #485e74;
+              line-height: 1.6;
+              font-family: 'Yantramanav', sans-serif;
+              padding: 1em;
+            }
+
+            .md-modal {
+              margin: auto;
+                position: fixed;
+                top: 100px;
+                left: 0;
+                right: 0;
+                width: 50%;
+                max-width: 630px;
+                min-width: 320px;
+                height: auto;
+                z-index: 2000;
+                background: white;
+                opacity: 0.8;
+                color: black;
+                font-size: 140%;
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+
+            .md-show {
+                visibility: visible;
+            }
+
+            .md-overlay {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 1000;
+                opacity: 0.8;
+                background: black;
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+
+            .md-show ~ .md-overlay {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .md-effect-12 .md-content {
+                -webkit-transform: scale(0.8);
+                -moz-transform: scale(0.8);
+                -ms-transform: scale(0.8);
+                transform: scale(0.8);
+                opacity: 1;
+                -webkit-transition: all 0.3s;
+                -moz-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+
+            .md-show.md-effect-12 ~ .md-overlay {
+                background-color: #e4f0e3;
+            } 
+
+            .md-effect-12 .md-content h3,
+            .md-effect-12 .md-content {
+                background: transparent;
+            }
+
+            .md-show.md-effect-12 .md-content {
+                -webkit-transform: scale(1);
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                transform: scale(1);
+                opacity: 1;
+            }
+            .md-close {
+                font-size:100%;
+            }
+            .container {
+              max-width: 1170px;
+              margin-left: auto;
+              margin-right: auto;
+              padding: 1em;
+            }
+
+            ul {
+              list-style: none;
+              padding: 0;
+            }
+
+            .brand {
+              text-align: center;
+                font-weight: 300;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+
+            .brand span {
+              color: #ffffff;
+            }
+
+            .wrapper {
+              box-shadow: 0 0 20px 0 rgba(57, 82, 163, 0.7);
+            }
+
+            .wrapper > * {
+              padding: 1em;
+            }
+
+            a {
+                color: black;
+                text-decoration: none;
+            }
+
+            /* ------------------- */
+            /* COMPANY INFORMATION */
+            /* ------------------- */
+
+            .company-info {
+              background: #C3C9DD;
+              border-top-left-radius: 4px;
+              border-top-right-radius: 4px;
+            }
+            .company-info h2,.company-info h3 {
+                font-size: 1.17em;
+            }
+            .company-info h2,.company-info h3,
+            .company-info ul {
+              text-align: center;
+              margin: 0 0 1rem 0;
+            }
+            .contact h3 {
+                margin-top: 0;
+            }
+
+            /* ------- */
+            /* CONTACT */
+            /* ------- */
+
+            .contact {
+              background: #eef0f7;
+              border-bottom-left-radius: 4px;
+              border-bottom-right-radius: 4px;
+            }
+
+            /* ---- */
+            /* FORM */
+            /* ---- */
+
+            .contact #contact-form label {
+              display: block;
+            }
+
+            .contact #contact-form p {
+              margin: 0;
+            }
+
+            .contact #contact-form .full {
+              grid-column: 1 / 3;
+            }
+
+            .contact #contact-form button,
+            .contact #contact-form input,
+            .contact #contact-form textarea {
+              width: 100%;
+              padding: 1em;
+              border: solid 1px #627EDC;
+              border-radius: 4px;
+            }
+
+            .contact #contact-form textarea {
+              resize: none;
+            }
+
+            .contact #contact-form button {
+              background: #627EDC;
+              border: 0;
+              color: #e4e4e4;
+              text-transform: uppercase;
+              font-size: 14px;
+              font-weight: bold;
+            }
+
+            .contact #contact-form button:hover,
+            .contact #contact-form button:focus {
+              background: #3952a3;
+              color: #ffffff;
+              outline: 0;
+              transition: background-color 2s ease-out;
+            }
+
+            ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+              color: grey;
+              opacity: 0.6; /* Firefox */
+            }
+
+            :-ms-input-placeholder { /* Internet Explorer 10-11 */
+              color: grey;
+            }
+
+            ::-ms-input-placeholder { /* Microsoft Edge */
+              color: grey;
+            }
+
+            input[type=checkbox] {
+                transform: scale(1.5);
+            }
+
+            .info {
+                font-size: 70%;
+                color: red;
+            }
+
+            .success {
+                background-color:green;
+                color: white;
+            }
+            .error {
+                background-color:red;
+                color: white;
+            }
+
+            /* ------------- */
+            /* MEDIA QUERIES */
+            /* ------------- */
+
+            @media only screen and (min-width: 700px) {
+              .contact #contact-form {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 20px;
+              }
+
+              .wrapper {
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+              }
+
+              .wrapper > * {
+                padding: 2em;
+              }
+
+              .company-info {
+                border-radius: 4px 0 0 4px;
+              }
+
+              .contact {
+                border-radius: 0 4px 4px 0;
+              }
+
+              .company-info h3,
+              .company-info ul,
+              .brand {
+                text-align: left;
+              }
+            }
+            @media only screen and (max-width: 699px) {
+              body {
+                padding:2px;
+              }
+              .container {
+                padding: 0;
+              }
+              input[type=text],input[type=email],.iti {
+                margin-bottom:20px;
+              }
+              button {
+                margin-top:20px;
+              }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- CONTAINER -->
+        <div class="container">
+            <h1 class="brand"><span>CONTACT FORM</span></h1>
+            <!-- WRAPPER -->
+            <div class="wrapper">
+                <!-- CONTACT INFORMATION -->
+                <div class="company-info">
+                    <h2>Our Details</h2>
+                    <ul>
+                        <li><i class="fa fa-road"></i> 123 Hideaway Street, Media City MC1 2HS</li>
+                        <li><i class="fa fa-phone"></i> <a href="tel:0800123456"> (0800) 123456</a></li>
+                        <li><i class="fa fa-envelope"></i> <a href="mailto:mark@markcox.uk"> mark@markcox.uk</a></li>
+                    </ul>
+                </div>
+                <!-- End CONTACT INFORMATION -->
+                <!-- CONTACT FORM -->
+                <div class="contact">
+                    <h3>Your Details</h3>
+                    <p>Please fill out the form below to contact us. All of the fields are required. When you have filled out the form, please hit the 'Submit' button. You will see a confirmation message when your details have been submitted.</p>
+                    <p>If you experience any issues contacting us with this form, please use one of the alternate contact methods on the left under the 'Our Details' section.
+                    <div id="contact-form">
+                        <p>
+                            <label for="fname">First Name</label><span id="fname-info" class="info"></span>
+                            <input type="text" name="fname" id="fname" placeholder="Your First Name" required>
+                        </p>
+                        <p>
+                            <label for="lname">Last Name</label><span id="lname-info" class="info"></span>
+                            <input type="text" name="lname" id="lname" placeholder="Your Last Name" required>
+                        </p>
+
+                        <p>
+                            <label for="email">Email Address</label><span id="email-info" class="info"></span>
+                            <input type="text" name="email" id="email" placeholder="Your Email Address" required>
+                        </p>
+
+                        <p>
+                            <label for="phone">Phone Number</label><span id="phone-info" class="info"></span>
+                            <input type="text" name="phone" id="phone" placeholder="Your Contact Number Inc. Area Code" required>
+                        </p>
+
+                        <p class="full">
+                            <label for="privacy" style="cursor:pointer;"><input type="checkbox" name="privacy" id="privacy" style="width:20px;" value="true"> Yes, I have read and agree to the Example Company <a href="https://www.exampleco.com/privacy-policy/" target="_blank">Privacy Policy</a>*. <span id="privacy-info" class="info"></span></label>
+                        </p>
+
+                        <p class="full">
+                            <label for="marketing" style="cursor:pointer;"><input type="checkbox" name="marketing" id="marketing" style="width:20px;" value="true"> Yes, I would like to receive marketing provided by Example Company.*</label>
+                        </p>
+
+                        <p class="full" style="font-size:11px;">* Your information may be used by Example Company and made available to any other department within Example Company to provide you with updates about new and existing products, news and promotional information. At any time, you can exercise your right of access, rectification, deletion or objection by contacting us at <a href="mailto:gdpr@exampleco.com" target="_blank">gdpr@exampleco.com</a>. For further information, please consult our <a href="https://www.exampleco.com/privacy-policy/" target="_blank">Privacy Policy</a>.</p>
+
+                        <p class="full">
+                            <span id="send-status"></span>
+                            <button name="submit" onClick="sendContact();">Submit</button>
+                        </p>
+
+                    </form>
+                </div>
+                <!-- End CONTACT FORM -->
+            </div>
+            <!-- End WRAPPER -->
+        </div>
+        <!-- End CONTAINER -->
+        <!-- BAD TOKEN WARNING MODAL -->
+        <div class="md-modal md-effect-12" style="display:none;">
+            <div class="md-content">
+                <h3>Sorry!</h3>
+                <div>
+                    <p>It appears that the Token required for this contact form is either missing or incorrect.</p>
+                    <ul>
+                        <li><strong>Please contact Mark Cox for the correct link to use with this form.</strong></li>
+                        <li> </li>
+                        <li><strong>Note:</strong> You may close this dialogue to view the form, however submission of the form will not function correctly. Click on the button below to close this window.</li>
+                    </ul>
+                    <button class="md-close">Close</button>
+                </div>
+            </div>
+        </div>
+        <div class="md-overlay" style="display:none;"></div>
+    </body>
+</html>
+
+<script>
+    // Function to restrict entry to the given inputFilter.
+    (function($) {
+      $.fn.inputFilter = function(inputFilter) {
+        return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+          if (inputFilter(this.value)) {
+            this.oldValue = this.value;
+            this.oldSelectionStart = this.selectionStart;
+            this.oldSelectionEnd = this.selectionEnd;
+          } else if (this.hasOwnProperty("oldValue")) {
+            this.value = this.oldValue;
+            this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+          } else {
+            this.value = "";
+          }
+        });
+      };
+    }(jQuery));
+
+    // Ajax submit the form data to the test server
+    function sendContact() {
+        var valid;  
+        valid = validateContact();
+        var thetoken;
+        thetoken = $.urlParam('token');
+        if(valid) {
+            jQuery.ajax({
+                url: 'test.php'+thetoken,
+                data:'fname='+$("#fname").val()+'&lname='+
+                $("#lname").val()+'&email='+
+                $("#email").val()+'&phone='+
+                $("#phone").val()+'&privacy='+
+                $("#privacy").val()+'&marketing='+
+                $("#marketing").val(),
+                type: "POST",
+                success:function(data){
+                    $("#send-status").html('<p class="success">'+data+'</p>');
+                },
+                error:function (){
+                    $("#send-status").html('<p class="error">Sorry, we were unable to send your details. Please try again or contact us via phone / email.</p>');
+                }
+            });
+        }
+    }
+
+    // Client side validate form fields as we do not have access to the submission server
+    function validateContact() {
+        var valid = true;   
+        $(".info").html('');
+        if(!$("#fname").val()) {
+            $("#fname-info").html("(First Name is required)");
+            $("#fname").css('background-color','#FFFFDF');
+            valid = false;
+        }
+        if(!$("#lname").val()) {
+            $("#lname-info").html("(Last Name is required)");
+            $("#lname").css('background-color','#FFFFDF');
+            valid = false;
+        }
+        if(!$("#email").val()) {
+            $("#email-info").html("(Email is required)");
+            $("#email").css('background-color','#FFFFDF');
+            valid = false;
+        }
+        if(!$("#email").val().match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
+            $("#email-info").html("(Not a valid Email Address)");
+            $("#email").css('background-color','#FFFFDF');
+            valid = false;
+        }
+        if(!$("#phone").val()) {
+            $("#phone-info").html("(Phone is required)");
+            $("#phone").css('background-color','#FFFFDF');
+            valid = false;
+        }
+        if (!$("#privacy").is(":checked")) {
+            $("#privacy-info").html("(You must agree to our Privacy Policy)");
+            $("#privacy").css('background-color','#FFFFDF');
+            valid = false;
+        }
+        return valid;
+    }
+
+    $(document).ready(function(){
+
+        // Use InputFilter to restrict phone field to positive integers only
+        $("#phone").inputFilter(function(value) {
+            return /^\d*$/.test(value); 
+        });
+
+        // function to grab the requested URL parameter
+        $.urlParam = function (name) {
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+                .exec(window.location.search);
+            return (results !== null) ? results[1] || 0 : false;
+        }
+
+        // Page load check for test token as submission will fail without it
+        var checktoken;
+        checktoken = $.urlParam('token');
+
+        if (checktoken.length < 20 || checktoken == false) { // Bad token in URL
+            $(".md-modal").show();
+            $(".md-overlay").show();
+        }
+
+        $(".md-close").on('click', function() {
+            $(".md-modal").hide();
+            $(".md-overlay").hide();
+        });
+    });
+</script>
