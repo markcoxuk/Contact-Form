@@ -409,7 +409,7 @@
         thetoken = $.urlParam('token');
         if(valid) {
             jQuery.ajax({
-                url: 'test.php'+thetoken,
+                url: 'test.php?token='+thetoken,
                 data:'fname='+$("#fname").val()+'&lname='+
                 $("#lname").val()+'&email='+
                 $("#email").val()+'&phone='+
